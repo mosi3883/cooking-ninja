@@ -5,7 +5,7 @@ import RecipeList from "../../components/RecipeList";
 // styles
 import "./Search.css";
 function Search() {
-  const [queryParams, setQueryParams] = useSearchParams();
+  const [queryParams] = useSearchParams();
   const query = queryParams.get("text");
   const {
     data: recipes,
