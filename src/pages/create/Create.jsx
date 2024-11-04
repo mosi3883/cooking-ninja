@@ -1,19 +1,19 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useFetch } from "../../hooks/useFetch";
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useFetch } from '../../hooks/useFetch';
 // styles
-import "./Create.css";
+import './Create.css';
 
 function Create() {
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [method, setMethod] = useState("");
-  const [cookingTime, setCookingTime] = useState("");
-  const [newIngredient, setNewIngredient] = useState("");
+  const [title, setTitle] = useState('');
+  const [method, setMethod] = useState('');
+  const [cookingTime, setCookingTime] = useState('');
+  const [newIngredient, setNewIngredient] = useState('');
   const [ingredients, setIngredients] = useState([]);
 
   const ingredientInput = useRef(null);
-  const { data, error, postData } = useFetch("http://localhost:4000/recipes", "POST");
+  const { data, error, postData } = useFetch('http://localhost:4000/recipes', 'POST');
 
   const handleSubmit = function (e) {
     e.preventDefault();
@@ -21,13 +21,13 @@ function Create() {
       title,
       ingredients,
       method,
-      cookingTime: cookingTime + " minutes",
+      cookingTime: cookingTime + ' minutes',
     });
   };
 
   useEffect(() => {
     if (data && !error) {
-      navigate("/");
+      navigate('/');
     }
   }, [data, error, navigate]);
 
@@ -38,7 +38,7 @@ function Create() {
     if (ing && !ingredients.includes(ing)) {
       setIngredients((prevIngs) => [...prevIngs, ing]);
     }
-    setNewIngredient("");
+    setNewIngredient('');
     ingredientInput.current.focus();
   };
 
@@ -46,38 +46,33 @@ function Create() {
     setIngredients((prevIngs) => prevIngs.filter((i) => i !== ing));
   };
   return (
-    <div className="create">
-      <h2 className="page-title">Add a New Recipe</h2>
+    <div className='create'>
+      <h2 className='page-title'>Add a New Recipe</h2>
       <form onSubmit={handleSubmit}>
         <label>
           <span>Recipe title:</span>
-          <input
-            type="text"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-            required
-          />
+          <input type='text' onChange={(e) => setTitle(e.target.value)} value={title} required />
         </label>
         <label>
           <span>Recipe ingredients:</span>
-          <div className="ingredients">
+          <div className='ingredients'>
             <input
-              type="text"
+              type='text'
               onChange={(e) => setNewIngredient(e.target.value)}
               value={newIngredient}
               ref={ingredientInput}
             />
-            <button className="btn" onClick={handleAddGredient}>
+            <button className='btn' onClick={handleAddGredient}>
               add
             </button>
           </div>
         </label>
         {ingredients.length > 0 && (
           <p>
-            Current ingredients:{" "}
+            Current ingredients:{' '}
             {ingredients.map((i) => (
               <span key={i}>
-                <em className="ing" onClick={() => deleteIng(i)}>
+                <em className='ing' onClick={() => deleteIng(i)}>
                   {i}
                 </em>
                 &nbsp;
@@ -93,14 +88,9 @@ function Create() {
 
         <label>
           <span>Cooking time (minutes):</span>
-          <input
-            type="number"
-            onChange={(e) => setCookingTime(e.target.value)}
-            value={cookingTime}
-            required
-          />
+          <input type='number' onChange={(e) => setCookingTime(e.target.value)} value={cookingTime} required />
 
-          <button className="btn">Submit</button>
+          <button className='btn'>Submit</button>
         </label>
       </form>
     </div>

@@ -1,18 +1,18 @@
 // styles
-import "./RecipeList.css";
+import './RecipeList.css';
 // Router
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function RecipeList({ recipes }) {
   if (recipes.length === 0) {
-    return <p className="error">No recipe found...</p>;
+    return <p className='error'>No recipe found...</p>;
   }
   return (
-    <div className="recipe-list">
+    <div className='recipe-list'>
       {recipes.length > 0 &&
         recipes.map((recipe) => {
           return (
-            <div key={recipe.id} className="card">
+            <div key={recipe.id} className='card'>
               <h3> {recipe.title}</h3>
               <p>{recipe.cookingTime} to make.</p>
               <div>{recipe.method.substring(0, 100)}...</div>

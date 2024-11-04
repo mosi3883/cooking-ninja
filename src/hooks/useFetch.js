@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-export const useFetch = (url, method = "GET") => {
+export const useFetch = (url, method = 'GET') => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
@@ -8,9 +8,9 @@ export const useFetch = (url, method = "GET") => {
 
   const postData = (postData) => {
     setOptions({
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(postData),
     });
@@ -33,20 +33,20 @@ export const useFetch = (url, method = "GET") => {
         setData(data);
         setError(null);
       } catch (err) {
-        if (err.name === "AbortError") {
-          console.log("the fetch was aborted");
+        if (err.name === 'AbortError') {
+          console.log('the fetch was aborted');
         } else {
           setIsPending(false);
-          setError("Could not fetch the data");
+          setError('Could not fetch the data');
         }
       }
     };
 
-    if (method === "GET") {
+    if (method === 'GET') {
       fetchData();
     }
 
-    if (method === "POST" && options) {
+    if (method === 'POST' && options) {
       fetchData(options);
     }
     return () => {
